@@ -1,12 +1,6 @@
 workflows:
   ios:
     name: iOS CI
-    triggers:
-      - schedule:
-          cron: "0 0 * * *" # Ejecutar diariamente a medianoche (UTC)
-    environment:
-      vars:
-        SWIFT_VERSION: "5.7" # Especifica la versión de Swift si es necesario
     scripts:
       - name: Install CocoaPods dependencies
         script: |
@@ -17,3 +11,4 @@ workflows:
           xcodebuild -workspace YourApp.xcworkspace -scheme YourApp -sdk iphoneos -destination 'platform=iOS Simulator,name=iPhone 14' clean build test
     artifacts:
       - build/YourApp.ipa
+
