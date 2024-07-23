@@ -4,12 +4,25 @@ workflows:
     environment:
       vars:
         LANG: en_US.UTF-8
+        ruby: 2.7.6 # Especifica la versión de Ruby si es necesario
     scripts:
       - name: Update RubyGems and Install CocoaPods
         script: |
+          # Actualizar RubyGems a la versión más reciente
           gem update --system
+          
+          # Verificar la versión de RubyGems
+          gem --version
+          
+          # Instalar CocoaPods
           gem install cocoapods
+          
+          # Verificar la versión de CocoaPods
+          pod --version
+          
+          # Instalar las dependencias definidas en el Podfile
           pod install
       - name: Build and test
         script: |
           xcodebuild -workspace YourApp.xcworkspace -scheme YourApp -sdk iphoneos -destination 'platform=iOS Simulator,name=iPhone 14' clean build test
+   
